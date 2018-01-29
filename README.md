@@ -7,19 +7,19 @@
 **Application Screenshots**
 
 ## Login Page Design
-![alt tag](https://github.com/amanrayat/miniflick/blob/master/screenshots/1.png
+![alt tag](https://github.com/amanrayat/miniflick/blob/master/screenshots/6.png)
 
 ## Home page 
-![alt tag](https://github.com/N-dabas/Mini-Flick/blob/master/screenshots/1.png)
+![alt tag](https://github.com/amanrayat/miniflick/blob/master/screenshots/1.png)
 
 ## Movie Search Results
-![alt tag](https://github.com/N-dabas/Mini-Flick/blob/master/screenshots/2.png)
+![alt tag](https://github.com/amanrayat/miniflick/blob/master/screenshots/2.png)
 
 ## Movie Details from API
-![alt tag](https://github.com/N-dabas/Mini-Flick/blob/master/screenshots/4.png)
+![alt tag](https://github.com/amanrayat/miniflick/blob/master/screenshots/4.png)
 
 ## Movie review and comments
-![alt tag](https://github.com/N-dabas/Mini-Flick/blob/master/screenshots/5.png)
+![alt tag](https://github.com/amanrayat/miniflick/blob/master/screenshots/5.png)
 
 ## User profile
-![alt tag](https://github.com/N-dabas/Mini-Flick/blob/master/screenshots/3.png)
+![alt tag](https://github.comamanrayat/miniflick/blob/master/screenshots/3.png)
