@@ -1,0 +1,39 @@
+<% include  partials/header.ejs %>
+<style>
+.btn-warning, .btn-success{
+  margin-left:20px;
+}
+h1{
+  color: white;
+  margin-left: 50px;
+}
+</style>
+<% if(action==1) { %>
+  <h1>Your Followers (<%= userdata.length %>) </h1>
+  <ul>
+      <% userdata.forEach(function(user){ %>
+          <h3 style="color:white; margin-left:20px;"><%= user.fname %> <%= user.lname %> <button class="btn btn-md btn-success" ><a href='/user/<%= user._id %>'> Visit Profile</a></button></li></h3>
+      <% })%>
+  </ul>
+<% } else if (action==2) { %>
+  <h1>You Follow (<%= userdata.length %>) </h1>
+  <ul>
+      <% userdata.forEach(function(user){ %>
+          <h3 style="color:white; margin-left:20px;"><%= user.fname %> <%= user.lname %> <button class="btn btn-md btn-success" ><a href='/user/<%= user._id %>'> Visit Profile
+          <form action="/unfollow/<%= currentuser._id %>/<%= user._id %>" method="POST">
+          <button class='btn btn-warning btn-md'>UnFollow <i class="glyphicon glyphicon-remove"> </i></button>
+          </form>
+          </a></button></li></h3>
+      <% })%>
+  </ul>
+  <%} else if (action==3) {%>
+    <% userdata.forEach(function(user){ %>
+        <h3 style="color:white; margin-left:20px;"><%= user.fname %> <%= user.lname %> <button class="btn btn-md btn-success" ><a href='/user/<%= user._id %>'> Visit Profile
+        <form action="/recommend/<%= currentuser._id %>/<%= currentuser.username %>/<%= user._id %>/<%= movieId %>" method="GET">
+        <button class='btn btn-success btn-md'> Recommend </i></button>
+        </form>
+        </a></button></li></h3>
+    <% })%>
+  <%}%>
+
+<% include partials/footer.ejs %>

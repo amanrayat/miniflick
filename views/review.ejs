@@ -1,0 +1,138 @@
+<% include partials/header %>
+<% include functions.ejs %>
+<style>
+.big_font{
+  font-size: 16px;
+}
+.comment-block{
+  background: white;
+}
+</style>
+
+<div class="container ">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img class="img-responsive" src="<%= movie.data.Poster %>" height=300 width=300>
+                        </div>
+                        <div class="col-lg-8">
+                          <h4 style="display:inline-block; font-size:22px; margin-left:20%"><%=movie.data.Title%></h4>
+                          <form style="display:inline; margin-left: 20px;" action="/addwatchlist/<%= currentuser._id %>/<%= movie.data.imdbID %>/add" method="POST">
+                              <input type="hidden" name="newmovie[imdb_id]" value="<%= movie.data.imdbID %>"  >
+                              <input type="hidden" name="newmovie[name]" value="<%= movie.data.Title %>"  >
+                              <input type="hidden" name="newmovie[image]" value="<%= movie.data.Poster %>" >
+                              <input type="hidden" name="newmovie[year]" value="<%= movie.data.Year %>" >
+                              <button class="btn btn-md btn-primary" style="margin-top:-10px;">Add to Watchlist  <i class="glyphicon glyphicon-plus"></i></button>
+                              <br><br>
+                          </form>
+                            <h4>
+                            <dl class="dl-horizontal">
+                              <dt>Plot :</dt>
+                              <dd><%= apidata.Plot %></dd><br>
+                              <dt>Actors :</dt>
+                              <dd><%= apidata.Actors %></dd>
+                              <dt>Awards :</dt>
+                              <dd><%= apidata.Awards %></dd>
+                              <dt>Genre :</dt>
+                              <dd><%= apidata.Genre %></dd><br>
+                              <dt>Released:</dt>
+                              <dd><%= apidata.Released %></dd><br>
+                              <dt>Reviewer :</dt>
+                              <dd><%= movie.author.username %></dd>
+                              <dt>Review :</dt>
+                              <dd><%= movie.review %></dd><br>
+                          </dl>
+                          </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="caption-full">
+                  <div style="margin-left:10px; font-size:15px;">
+                    <b>Ratings</b>
+                    <% apidata.Ratings.forEach(function(movie){ %>
+                        <dd style="color:blue;" ><%= movie["Source"] %> - <%= movie["Value"] %></dd>
+                    <% }) %>
+                  </div>
+                    <% if(currentuser && movie.author.id.equals(currentuser._id)) { %>
+                        <a href="/review/<%= movie._id %>/edit" class="btn btn-warning">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <form id="delete-form" action="/review/<%= movie._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger"> Delete <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+            <div class="well">
+                <!-- <div class="text-right">
+                    <a class="btn btn-success" href="/review/<%= movie._id %>/comments/new" >Add New Response <i class="fa fa-comments" aria-hidden="true"></i></i></a>
+                </div> -->
+                <form action="/review/<%= movie._id %>/comments" method="POST"> <!--send the POST data to post.campgrounds-->
+                    <div class="form-group" style="display:inline-block;">
+                        <input class="form-control" style="width:500%;"  type="text" name="comment[text]" placeholder="Comment">
+                    </div>
+                    <div class="form-group" style="display:inline-block; float:right;">
+                        <button class="btn btn-lsm btn-primary"> Add Response</button>
+                    </div>
+                </form>
+
+                <hr>
+            <% mlist=[] %>
+            <% movie.comments.forEach(function(comment){
+               mlist.push(comment)
+               newlist= mlist.sort(function(a, b) {
+                   return new Date(b.date) - new Date(a.date);
+                 });
+               });
+               %>
+               <% newlist.forEach(function(comment){ %>
+                    <div class="row comment-block">
+                        <div class="col-md-12">
+                          <div>
+                          <div style="display:inline-block; font-size:14px;">
+                            <a href="/user/<%=comment.author.id%>"><strong><%= comment.author.username %></strong></a><br>
+                          </div>
+                            <% if(currentuser && comment.author.id.equals(currentuser._id)) { %>
+                              <div style="float:right; display:inline-block; font-size:11px; font-style:italic; opacity:0.7;">
+                                <%
+                                date=formatAMPM(comment.date);
+                                %>
+                                <%= date %>
+                              </div>
+                            <% } %>
+                          </div>
+                            <div>
+                              <div style="display:inline-block; font-style:italic; font-weight:500; font-size:16px;">
+                                <%= comment.text %>
+                              </div>
+                              <div style="display:inline-block; float:right;">
+                                <a  style="font-size:10px;  margin-top:-10px;" class="btn btn-xs btn-warning" href="/review/<%= movie._id %>/comments/<%= comment._id %>/edit">
+                                    Edit
+                                </a>
+                                <form id="delete-form" action="/review/<%= movie._id %>/comments/<%= comment._id %>?_method=DELETE"   method="POST">
+                                <button class="btn btn-xs btn-danger" style="font-size:10px; margin-top:-10px;"> Delete</button>
+                                </form>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer %>
+
+<!-- //sorting by date
+data=[{_id: "5a1e52c94cb8610d5f0cc03b", text: 'ajnsndsn', __v: 0, date: 'Wed Nov 29 2017 02:25:13 GMT-0500 (EST)',
+author: { id: "59c0756ba155af18bde4e665", username: 'mohit' } },
+{ _id: "5a1e52ee4cb8610d5f0cc03c", text: 'xancncncanc', __v: 0, date: 'Wed Nov 29 2017 01:25:50 GMT-0500 (EST)',
+author: { id: "59c0756ba155af18bde4e665", username: 'mohit' } },
+{ _id: "5a1e52f24cb8610d5f0cc03d", text: 'cancnacn', __v: 0, date: 'Wed Nov 29 2017 12:25:54 GMT-0500 (EST)',
+author: { id: "59c0756ba155af18bde4e665", username: 'mohit' } }]
+data.sort(function(a, b) {
+    return new Date(a.date) - new Date(b.date);
+}) -->

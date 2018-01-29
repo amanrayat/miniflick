@@ -1,0 +1,32 @@
+<% include partials/header.ejs %>
+<div class="container">
+<h2 > <%= user.fname %> <%= user.lname %>'s <span style="font-size:0.8em">Watchlist</span></h2>
+<br>
+<div class='row text-center' style="display:flex; flex-wrap:wrap;">
+        <% user.watchlist.forEach(function(movie){ %>
+
+            <div class='col-lg-3 col-sm-6'>
+                <div class="thumbnail">
+                    <% if (movie.image !== 'N/A' ) {%>
+                        <img src="<%= movie.image %> " height=300 width=300>
+                    <% }else{ %>
+                        <img src="http://www.freeiconspng.com/uploads/no-image-icon-23.jpg" >
+                    <% } %>
+
+                    <div class='caption'>
+                        <h4><a href="/movie/<%= movie.imdb_id %>" ><%= movie.name %> - <%= movie.year %> </a></h4>
+                    </div>
+                    <form action="/watchlist/<%= currentuser._id %>/remove" method="POST">
+                        <input type="hidden" name="newmovie[name]" value="<%= movie.name %>"  >
+                        <input type="hidden" name="newmovie[image]" value="<%= movie.image %>" >
+                        <input type="hidden" name="newmovie[year]" value="<%= movie.year %>" >
+                        <button class="btn btn-sm btn-primary">Mark as watched </button>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+</div>
+<% include partials/footer.ejs %>

@@ -1,0 +1,88 @@
+body {
+  background-color: #000;
+}
+
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+}
+
+#landing-header h1 {
+  color: #fff;
+}
+
+.slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 30s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+  background-image: url(https://initiate.alphacoders.com/images/573/cropped-1440-900-57394.jpg?1873) ;
+  /*dark knight*/
+}
+.slideshow li:nth-child(2) { 
+  background-image: url(https://initiate.alphacoders.com/images/615/stretched-1440-900-615040.jpg?7607);
+  animation-delay: 5s; 
+  /*god father*/
+}
+.slideshow li:nth-child(3) { 
+  background-image: url(https://initiate.alphacoders.com/images/835/cropped-1440-900-835666.jpg?5643); 
+  animation-delay: 10s; 
+  /*wonder woman*/
+}
+.slideshow li:nth-child(4) { 
+  background-image: url(https://initiate.alphacoders.com/images/573/cropped-1440-900-573887.jpg?5056);
+  animation-delay: 15s; 
+  /*shawshank*/
+}
+.slideshow li:nth-child(5) { 
+  background-image: url(https://initiate.alphacoders.com/images/800/cropped-1440-900-800329.jpg?7812);
+  animation-delay: 20s; 
+  /*fight club*/
+  
+}
+
+@keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+	opacity: 1;
+}

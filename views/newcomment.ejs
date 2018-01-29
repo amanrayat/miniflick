@@ -1,0 +1,25 @@
+<% include partials/header.ejs %>
+
+<div class="container">
+    <div class="row">
+        <h2 style="text-align:center;"> Add a comment </h2>
+        <div style="width:30% ; margin:25px auto;">
+            <form action="/review/<%= movie._id %>/comments" method="POST"> <!--send the POST data to post.campgrounds-->
+                <div class="form-group">
+                    <input class="form-control" type="text" name="comment[text]" placeholder="Text" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block"> Submit !</button>
+                </div>
+            </form>
+            <a href='/review/<%= movie._id %>'> Go back </a>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<% include partials/footer.ejs %>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mini-Flick</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    </head>
+    <body>
+
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+
+    <div id="landing-header">
+ 		<h1>Welcome to Mini-Flick</h1>
+		<a href="/login" class="btn btn-lg btn-success"> Login </a><br><br>
+        <a href="/register" class="btn btn-lg btn-success"> Register</a>
+    </div>
+
+    <ul class="slideshow">
+      <li><img src="/images/pursuit.jpg" width="100%" height="100%"></li>
+      <li><img src="/images/wonder_woman-min.jpg" width="100%" height="100%"></li>
+      <li><img src="/images/usual-min.jpg" width="100%" height="100%"></li>
+      <li><img src="/images/guardian.png" width="100%" height="100%"></li>
+      <li><img src="/images/shawshank-min.jpg" width="100%" height="100%"></li>
+    </ul>
+
+<% include partials/footer %>

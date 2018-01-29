@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Movie-Hub
+        </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    
+<body>
+
+<div class="container">
+    <div class="row">
+        <div style="width:30% ; margin:75px auto;">
+            <h2 style="text-align:center;">Register Yourself !!</h2>
+            <form action="/register" method="POST"> <!--send the POST data to post.campgrounds-->
+                <div class="form-group">
+                    <input class="form-control" type="text" name="fname" placeholder="Firstname">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="lname" placeholder="Lastname">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="fmovie" placeholder="Favorite Movie">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="factor" placeholder="Favorite Actor">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="interests" placeholder="Interests">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="username" placeholder="Username">
+                </div>
+                
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block"> Submit</button>
+                </div>
+            </form>
+            <a href='/'> Go back </a>
+            
+        </div>
+        
+        
+    </div>
+</div> 
+</body>
+
+
+
+<% include partials/footer.ejs %>

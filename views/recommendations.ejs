@@ -1,0 +1,33 @@
+<% include partials/header.ejs %>
+<div class="container">
+<h2 >Recommendations</h2>
+<br>
+<div class='row text-center' style="display:flex; flex-wrap:wrap;">
+        <% user.recommendations.forEach(function(movie){ %>
+
+            <div class='col-lg-3 col-sm-6'>
+                <div class="thumbnail">
+                    <% if (movie.image !== 'N/A' ) {%>
+                        <img src="<%= movie.image %> " height=300 width=300>
+                    <% }else{ %>
+                        <img src="http://www.freeiconspng.com/uploads/no-image-icon-23.jpg" >
+                    <% } %>
+
+                    <div>
+                        <h4><a href="/movie/<%= movie.imdb_id %>" ><%= movie.name %> - <%= movie.year %> </a></h4>
+                    </div>
+                    <div>
+                        <a href="/user/<%= movie.recommender.id %>"><h4>By: <%= movie.recommender.username %></a></h4>
+                    </div>
+                    <form action="/recommendations/<%= currentuser._id %>/remove" method="POST">
+                        <input type="hidden" name="newmovie[name]" value="<%= movie.name %>"  >
+                        <button class="btn btn-sm btn-primary">Mark as watched </button>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+</div>
+<% include partials/footer.ejs %>

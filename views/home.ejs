@@ -1,0 +1,154 @@
+<% include  partials/header.ejs %>
+<style>
+.followers{
+      background: rgb(56, 181, 138);
+      color: white;
+      margin-left: 560px;
+}
+.followers:hover{
+  color:#11417c;
+}
+.followed{
+  color: white;
+  background: #11417c;
+}
+.followed:hover{
+  color: rgb(56, 181, 138);
+}
+.input-group-xs{
+  width: 250px;65
+  padding-bottom: 0px;
+}
+.form_review{
+  display: inline-block;
+margin-bottom: -12px;
+margin-left: 25px;
+}
+.form_search{
+display: inline-block;
+margin-bottom: -12px;
+/*margin-left: 25px;*/
+}
+.form-container{
+  display: inline-block;
+}
+.button{
+  margin-left: 5px;
+}
+</style>
+<div class='container'>
+    <header class='jumbotron'>
+        <div class='container'>
+            <h2 style="color:#333846;"> Welcome to Mini Flick
+              <a class='btn followers btn-large' href="/follow/<%= 1 %>/<%= currentuser._id %>"> Followers </a>
+              <a class='btn followed btn-large' href="/follow/<%= 2 %>/<%= currentuser._id %>"> Following </a>
+            </h2>
+            <!-- <p> The best reviews about movies can be found here </p> -->
+            <!-- <a class='btn btn-primary btn-large' href="/search"> Search your Movie  <i class="glyphicon glyphicon-search"></i></a> -->
+                <p class="form-container">
+                  <form class="form_search" action="/results" method="GET">
+                      <div class="input-group input-group-xs">
+                        <input type="text" class="form-control" name="search" placeholder="Add Reviews">
+                        <div class="input-group-btn">
+                          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                      </div>
+                  </form>
+                  <form class="form_review" action="/reviewSearch" method="GET">
+                      <div class="input-group input-group-xs">
+                        <input type="text" class="form-control" name="review_key" placeholder="Search Reviews">
+                        <div class="input-group-btn">
+                          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                      </div>
+                  </form>
+                <p>
+            <p> <a class='btn btn-primary btn-large' href="/watchlist/<%= currentuser._id %>"> Watchlist <i class="button glyphicon glyphicon-menu-hamburger"> </i></a> </p>
+            <p> <a class='btn btn-success btn-large' href="/recommendations/<%= currentuser._id %>"> Recommendations <i class="button glyphicon glyphicon-film"> </i></a> </p>
+            <!-- <p> <a class='btn btn-info btn-large' href="/user/<%= currentuser._id %>/edit"> Edit Profile <i class=" button glyphicon glyphicon-edit"></i></a> </p> -->
+            <div class="text-right">
+                <form action="/uSearch" method="GET">
+                    <div class="input-group input-group-lg">
+                      <input type="text" class="form-control" name="user_key" placeholder="Search User">
+                      <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                      </div>
+                    </div>
+                </form>
+            </div>
+         </div>
+    </header>
+    <% if(all_movies.length!==0) {%>
+    <h2 class="review" align="center"> Recent Reviews</h2><br>
+    <div class='row text-center' style="display:flex;flex-wrap:wrap;border-radius: 10px;padding: 10px;padding-bottom: 0px;">
+        <% all_movies.forEach(function(movie){ %>
+            <div class='col-lg-2 col-sm-6'>
+                <div class='thumbnail'>
+                  <a href="/review/<%= movie._id %>">
+                    <img src="<%= movie.data.Poster %> " height=300 width=300>
+                  </a>
+                    <div>
+                        <h4><a href="/review/<%= movie._id %>"><%= movie.data.Title %></a></h4>
+                    </div>
+                        <a href="/movie/<%= movie.mid %>" >Read More</a><br>
+                    Reviewer: <%= movie.author.username %>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <% } %>
+    <% if(my_movies.length!==0) {%>
+    <h2  class = "review" align="center">Your Reviews</h2>
+    <div class='row text-center' style="display:flex;flex-wrap:wrap;border-radius: 10px;padding: 10px;padding-bottom: 0px;">
+        <% my_movies.forEach(function(movie){ %>
+            <div class='col-lg-2 col-sm-6'>
+                <div class='thumbnail'>
+                    <a href="/review/<%= movie._id %>">
+                      <img src="<%= movie.data.Poster %> " height=300 width=300>
+                    </a>
+                    <div class='caption'>
+                        <h4> <a href="/review/<%= movie._id %>"><%= movie.data.Title %> </a></h4>
+                    </div>
+                    <p>
+                        <a href="/movie/<%= movie.mid %>" >Read More</a>
+                    </p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <% } %>
+</div>
+
+<!-- <script>
+function showHint(str) {
+    if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        var html = "";
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                //document.getElementById("txtHint").innerHTML = data['loc_name'];
+                var len=0;
+                for(var key in ["gump","a","b"])
+                {
+                    len ++;
+                    //document.getElementById("txtHint").innerHTML = data[key]['loc_name'];
+                    console.log(key);
+                    html += "<option value='"+data[key]['loc_name']+"'>"+data[key]['loc_name']+"</option>";
+                }
+
+            }
+            $('#dropdown').html(html);
+            $('#dropdown').attr("size", len); // open dropdown
+
+        };
+
+        xmlhttp.open("GET", "gethint.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}
+</script> -->
+<% include partials/footer.ejs %>

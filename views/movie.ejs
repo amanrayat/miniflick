@@ -1,0 +1,53 @@
+<% include partials/header %>
+<body>
+  <style>
+  .row {
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+  </style>
+<div class="container style">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img class="img-responsive" src="<%= movie.Poster %>" height=300 width=300>
+                        </div>
+                        <div class="col-lg-8">
+                            <h5>
+                                <dl class="dl-horizontal">
+                                    <dt>Title :</dt>
+                                    <dd><%= movie.Title %></dd>
+                                    <dt>Released On :</dt>
+                                    <dd><%= movie.Released %></dd><br>
+                                    <dt>Genre :</dt>
+                                    <dd><%= movie.Genre %></dd>
+                                    <dt>Director :</dt>
+                                    <dd><%= movie.Director %></dd><br>
+                                    <dt>Plot :</dt>
+                                    <dd><%= movie.Plot %></dd><br>
+                                    <dt>Actors :</dt>
+                                    <dd><%= movie.Actors %></dd>
+                                    <dt>Awards :</dt>
+                                    <dd><%= movie.Awards %></dd><br>
+                                    <dt>Language :</dt>
+                                    <dd><%= movie.Language %></dd>
+                                    <dt>Website :</dt>
+                                    <dd><%= movie.Website %></dd><br>
+                                    <dt>Ratings :</dt>
+                                        <% movie.Ratings.forEach(function(movie){ %>
+                                            <dd style="color:blue;" ><%= movie["Source"] %> - <%= movie["Value"] %></dd>
+                                        <% }) %>
+                                </dl>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<% include partials/footer %>

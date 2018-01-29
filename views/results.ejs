@@ -1,0 +1,58 @@
+<% include partials/header.ejs %>
+<style>
+h3{
+  color:white;
+      margin-left: 20px;
+}
+/*.thumbnail{
+  background: #2193b0;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}*/
+</style>
+<% if(data["Search"]) {%>
+<div class="container">
+<h2> Results for "<%= keyword %>"</h2>
+<br>
+<div class='row text-center' style="display:flex; flex-wrap:wrap;">
+        <% data["Search"].forEach(function(movie){ %>
+            <div class='col-lg-3 col-sm-6'>
+                <div class="thumbnail">
+                    <% if (movie["Poster"] !== 'N/A' ) {%>
+                        <img src="<%= movie["Poster"] %> " height=300 width=300>
+                    <% }else{ %>
+                        <img src="http://www.freeiconspng.com/uploads/no-image-icon-23.jpg" >
+                    <% } %>
+
+                    <div class='caption'>
+                        <h4> <a href="/movie/<%= movie["imdbID"] %>" ><%= movie["Title"] %> - <%= movie["Year"] %></a></h4>
+                    </div>
+
+                    <form style="display:inline-block;" action="/addreview/<%= movie["imdbID"] %>" method="GET">
+                        <button class="btn btn-sm btn-warning">Add Review</button>
+                        <br><br>
+                    </form>
+                    <form style="display:inline-block;" action="/addwatchlist/<%= currentuser._id %>/<%= movie["imdbID"] %>/add" method="POST">
+                        <input type="hidden" name="newmovie[imdb_id]" value="<%= movie["imdbID"] %>"  >
+                        <input type="hidden" name="newmovie[name]" value="<%= movie["Title"] %>"  >
+                        <input type="hidden" name="newmovie[image]" value="<%= movie["Poster"] %>" >
+                        <input type="hidden" name="newmovie[year]" value="<%= movie["Year"] %>" >
+                        <button class="btn btn-sm btn-primary">Add to Watchlist</button>
+                        <br><br>
+                    </form>
+                    <form action="/recommend/<%= currentuser._id %>/<%= movie["imdbID"] %>" method="GET">
+                        <button class="btn btn-sm btn-success">Recommend</button>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+        <% }else{ %>
+        <h3> No results for "<%= keyword %>", <a href="/home">Try Again</a></h3>
+        <% } %>
+
+    </div>
+</div>
+</div>
+<% include partials/footer.ejs %>

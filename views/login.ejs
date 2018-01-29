@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Movie-Hub
+        </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    setTimeout(function() {
+        $('#flash-message').fadeOut('slow');
+    }, 2000);
+    </script>
+    </head>
+    <style>
+    body{
+      background: url("/images/film_bg0.jpg");
+      background-size:100%;
+    }
+    </style>
+<body>
+  <div class="container flash-message" id="flash-message" style="margin-top:20px;">
+    <% if (success && success.length>0) { %>
+      <div class="alert alert-success" style="font-size:16px; font-weight:bold;" role="alert">
+        <%= success %>
+      </div>
+    <% } %>
+    <% if (error && error.length>0) { %>
+      <div class="alert alert-danger" style="font-size:16px; font-weight:bold;" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+  </div>
+<div class="container">
+    <div class="row">
+
+        <div style="width:30% ; margin:200px auto;">
+            <h2 style="text-align:center; color: white;">Login</h2>
+            <form action="/login" method="POST"> <!--send the POST data to post.campgrounds-->
+                <div class="form-group">
+                    <input class="form-control" type="text" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block"> Sign into your account <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                </div>
+            </form>
+            <a href='/' style="color: white;"> Go back </a>
+        </div>
+    </div>
+</div>
+</body>

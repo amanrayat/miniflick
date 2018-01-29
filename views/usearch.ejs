@@ -1,0 +1,30 @@
+<% include  partials/header.ejs %>
+<style>
+h1,h3{
+  color: white;
+}
+.btn-success, .btn-warning{
+  margin-left:20px;
+}
+</style>
+
+<h1> Results for username "<%= key %>"</h1>
+<ul>
+    <% users.forEach(function(user){ %>
+      <% if (user.id!==currentuser.id) {%>
+        <h3><li><%= user.fname %> <%= user.lname %> <button class="btn btn-md btn-success" ><a href='/user/<%= user._id %>'> Visit Profile
+          <% if (currentuser.followed.indexOf(user._id)>-1){ %>
+          <form action="/unfollow/<%= currentuser._id %>/<%= user._id %>" method="POST">
+          <button class='btn btn-warning btn-md'>UnFollow <i class="glyphicon glyphicon-remove"> </i></button>
+          </form>
+          <% } else { %>
+          <form action="/follow/<%= currentuser._id %>/<%= user._id %>" method="POST">
+          <button class='btn btn-success btn-md'>Follow <i class="glyphicon glyphicon-ok"> </i></button><br><br>
+          </form>
+          <% } %>
+        </a></button></li></h3>
+      <% } %>
+    <% })%>
+</ul>
+
+<% include partials/footer.ejs %>
