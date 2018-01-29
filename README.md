@@ -7,7 +7,7 @@
 **Application Screenshots**
 
 ## Login Page Design
-![alt tag](https://github.com/N-dabas/Mini-Flick/blob/master/screenshots/6.png)
+![alt tag](https://github.com/amanrayat/miniflick/blob/master/screenshots/1.png
 
 ## Home page 
 ![alt tag](https://github.com/N-dabas/Mini-Flick/blob/master/screenshots/1.png)
